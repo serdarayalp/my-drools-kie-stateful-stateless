@@ -1,0 +1,17 @@
+package rules
+
+import de.mydomain.model.Counter;
+
+rule "Counter1"
+    when $Counter  : Counter()
+    then
+        System.out.println("Counter (1) : " + $Counter.count + " and the name is : " + $Counter.name);
+    end
+
+rule "Counter2"
+    when
+        $Counter  : Counter()
+        accumulate (Counter() ; $cnt : count())
+    then
+        System.out.println("Counter (2) : " + $Counter.count + " and the name is : " + $Counter.name + " accumaulated value is " +$cnt);
+    end
